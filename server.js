@@ -15,6 +15,10 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
+app.get('/sent', function(req, res) {
+	res.render('index');
+})
+
 app.post('/sent', function(req, res) {
 	var name = req.body.name;
 	var message = req.body.message;
