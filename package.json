@@ -1,0 +1,22 @@
+{
+  "name": "chatter",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "3.x"
+  },
+  "description": "A chat application",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elio303/nodeApp.git"
+  },
+  "author": "Elio Tanke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elio303/nodeApp/issues"
+  },
+  "homepage": "https://github.com/elio303/nodeApp#readme"
+}
