@@ -22,15 +22,21 @@ app.use(function(req, res, next){
 	next();
 });
 
+
 app.get('/', function(req, res) {
-    res.render('index');
+	routeHandler.listOfPosts(function(err, posts){
+		if(err){
+			console.log(err);
+		}
+		res.render('index', {
+		    name: "",
+		    message: "",
+		    posts: posts.reverse()
+		});
+	});
 });
 
-app.get('/sent', function(req, res) {
-	res.render('index');
-})
-
-app.post('/sent', function(req, res) {
+app.post('/', function(req, res) {
 	var name = req.body.name;
 	var message = req.body.message;
 	// adding message to DB
@@ -40,7 +46,7 @@ app.post('/sent', function(req, res) {
 		if(err){
 			console.log(err);
 		}
-		res.render('sent', {
+		res.render('index', {
 		    name: name,
 		    message: message,
 		    posts: posts.reverse()
