@@ -8,11 +8,13 @@ var listOfPosts = function(callback){
 			console.error(err);
 		}
 		postBOs = [];
-		Object.keys(postDAOs).forEach(function(key) {
+		Object.keys(postDAOs).forEach(function(key, index, array) {
 			var postDAO = postDAOs[key]
 			// Should use converter here
 			postBOs.push(new PostBO(postDAO._id, postDAO.name, postDAO.message));
-			callback(err, postBOs);
+			if(index==(array.length - 1)){
+				callback(err, postBOs);
+			}
 		});
 	});
 }

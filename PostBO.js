@@ -43,9 +43,11 @@ PostBO.prototype.save = function(callback){
 
 PostBO.prototype.list = function(postDAOs, callback){
 	postBOs = {};
-	Object.keys(postDAOs).forEach(function(key) {
+	Object.keys(postDAOs).forEach(function(key, index, array) {
 			postBOs[key] = Converter.convertFromPostDAOtoPostBO(postDAOs[key]);
-			callback(err, postBOs);
+			if(index==(array.length-1)){
+				callback(err, postBOs);
+			}
 	});
 }
 

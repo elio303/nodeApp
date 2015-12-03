@@ -43,16 +43,9 @@ app.post('/sent', function(req, res) {
 		res.render('sent', {
 		    name: name,
 		    message: message,
-		    posts: posts
+		    posts: posts.reverse()
 		});
 	});
-	/*
-	res.render('sent', {
-	    name: name,
-	    message: message,
-	    //posts: posts
-	});
-	*/
 });
 
 server.listen(app.get('port'), function() {
