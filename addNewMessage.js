@@ -1,7 +1,7 @@
 var PostBO = require('./PostBO.js')
 var mongoose = require('mongoose');
 
-var addNewMessage = function(name, message){
+var addNewMessage = function(name, message, callback){
 	var newPostBO = new PostBO(mongoose.Types.ObjectId(), name, message);
 	if (newPostBO){
 		newPostBO.save(function(err, postBO){
@@ -9,7 +9,7 @@ var addNewMessage = function(name, message){
 				console.error(err);
 			}
 			else{
-				//Do something here
+				callback(err, postBO);
 			}
 		});
 	}

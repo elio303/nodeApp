@@ -15,6 +15,10 @@ var postDAOSchema = new mongoose.Schema({
 		type: String, 
 		trim: true,
 		required: true
+	},
+	time : { 
+		type : Date, 
+		default: Date.now 
 	}, 
 }, {collection: GLOBAL_CONSTANTS.MODEL.TABLE_NAMES.POST, _id: false});
 
@@ -27,24 +31,16 @@ postDAOSchema.statics.create = function(id, name, message){
 };
 
 postDAOSchema.statics.list = function(callback){
-	PostDAO.find({}, function(err, postDAOs) {
+	PostDAO.find({}, null, {limit: 10, sort: {'time': -1}}, function(err, postDAOs) {
 		if(err){
 			console.error("Error when finding posts in DB: " + err);
 		}
 		var postMap = {};
 		if(postDAOs.length == 0){
-			callback(err, postMap);
+			callback(err, postDAOs);
 		}
 		else{
-			postDAOs.forEach(function(postDAO, index, array) {
-				postMap[postDAO._id] = postDAO;
-				if (array.length - 1 == index){
-					if(err){
-						console.error(err);
-					}
-					callback(err, postMap);
-				}
-			});
+			callback(err, postDAOs);
 		}
 	});
 };

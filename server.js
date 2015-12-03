@@ -31,7 +31,7 @@ app.get('/', function(req, res) {
 		res.render('index', {
 		    name: "",
 		    message: "",
-		    posts: posts.reverse()
+		    posts: posts
 		});
 	});
 });
@@ -40,16 +40,17 @@ app.post('/', function(req, res) {
 	var name = req.body.name;
 	var message = req.body.message;
 	// adding message to DB
-	addNewMessage(name, message);
-	// Getting all messages from DB
-	listOfPosts(function(err, posts){
-		if(err){
-			console.log(err);
-		}
-		res.render('index', {
-		    name: name,
-		    message: message,
-		    posts: posts.reverse()
+	addNewMessage(name, message, function(err, postBO){
+		// Getting all messages from DB
+		listOfPosts(function(err, posts){
+			if(err){
+				console.log(err);
+			}
+			res.render('index', {
+			    name: name,
+			    message: message,
+			    posts: posts
+			});
 		});
 	});
 });

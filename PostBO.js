@@ -1,4 +1,3 @@
-var PostDAO = require('./PostDAO.js');
 var Converter = require('./converter.js');
 
 function PostBO(id, name, message){
@@ -38,16 +37,6 @@ PostBO.prototype.save = function(callback){
 			console.error(err);
 		}
 		callback(err, data);
-	});
-}
-
-PostBO.prototype.list = function(postDAOs, callback){
-	postBOs = {};
-	Object.keys(postDAOs).forEach(function(key, index, array) {
-			postBOs[key] = Converter.convertFromPostDAOtoPostBO(postDAOs[key]);
-			if(index==(array.length-1)){
-				callback(err, postBOs);
-			}
 	});
 }
 
