@@ -22,7 +22,6 @@ app.use(function(req, res, next){
 	next();
 });
 
-
 app.get('/', function(req, res) {
 	routeHandler.listOfPosts(function(err, posts){
 		if(err){

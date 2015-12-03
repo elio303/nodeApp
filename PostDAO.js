@@ -32,15 +32,20 @@ postDAOSchema.statics.list = function(callback){
 			console.error("Error when finding posts in DB: " + err);
 		}
 		var postMap = {};
-		postDAOs.forEach(function(postDAO, index, array) {
-			postMap[postDAO._id] = postDAO;
-			if (array.length - 1 == index){
-				if(err){
-					console.error(err);
+		if(postDAOs.length == 0){
+			callback(err, postMap);
+		}
+		else{
+			postDAOs.forEach(function(postDAO, index, array) {
+				postMap[postDAO._id] = postDAO;
+				if (array.length - 1 == index){
+					if(err){
+						console.error(err);
+					}
+					callback(err, postMap);
 				}
-				callback(err, postMap);
-			}
-		});
+			});
+		}
 	});
 };
 
