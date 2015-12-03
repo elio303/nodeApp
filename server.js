@@ -5,7 +5,8 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var database = require('./database.js');
 var connected = false;
-var routeHandler = require('./routeHandler.js');
+var listOfPosts = require('./listOfPosts');
+var addNewMessage = require('./addNewMessage');
 
 app.set('port', (process.env.PORT || 5000));
 app.set('views',  __dirname + '/views/pages');
@@ -23,7 +24,7 @@ app.use(function(req, res, next){
 });
 
 app.get('/', function(req, res) {
-	routeHandler.listOfPosts(function(err, posts){
+	listOfPosts(function(err, posts){
 		if(err){
 			console.log(err);
 		}
@@ -39,9 +40,9 @@ app.post('/', function(req, res) {
 	var name = req.body.name;
 	var message = req.body.message;
 	// adding message to DB
-	routeHandler.addNewMessage(name, message);
+	addNewMessage(name, message);
 	// Getting all messages from DB
-	routeHandler.listOfPosts(function(err, posts){
+	listOfPosts(function(err, posts){
 		if(err){
 			console.log(err);
 		}

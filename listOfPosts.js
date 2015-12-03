@@ -1,4 +1,5 @@
 var PostDAO = require('./PostDAO.js');
+var Converter = require('./converter.js');
 
 var listOfPosts = function(callback){
 	PostDAO.list(function(err, postDAOs){
