@@ -1,7 +1,6 @@
 module.exports = function(app){
 	var listOfPosts = require('./listOfPosts');
 	var addNewMessage = require('./addNewMessage');
-	var postCount = 0;
 
 	app.get('/', function(req, res) {
 		// Initial call to page
@@ -14,14 +13,13 @@ module.exports = function(app){
 			    message: "",
 			    posts: posts
 			});
-			// initialize number of posts
-			postCount = 10;
 		});
 	});
 
-	app.get('/show', function(req, res) {
+	app.post('/show', function(req, res) {
+		var count = req.body.count;
 		// Showing more posts via AJAX
-		listOfPosts(postCount, function(err, posts){
+		listOfPosts(count, function(err, posts){
 			if(err){
 				console.log(err);
 			}
@@ -35,7 +33,6 @@ module.exports = function(app){
 					done: 'done'
 				});
 			}
-			postCount = postCount + 10;
 		});
 	})
 

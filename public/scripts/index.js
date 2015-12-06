@@ -1,8 +1,10 @@
 window.onload = function(){	
+	var postCount = 10;
 	$('#show').click(function(){
 		$.ajax({
-			method: "GET",
+			method: 'POST',
 			url: "/show",
+			data: {count: postCount},
 			success: function(data){
 				if(data.done !='done'){
 					$("ul").append(data);
@@ -10,6 +12,7 @@ window.onload = function(){
 				else{
 					$('#show').remove();
 				}
+				postCount = postCount + 10;
 			}
 		});
 	});
