@@ -32,11 +32,12 @@ PostBO.prototype.setMessage = function(message){
 
 PostBO.prototype.save = function(callback){
 	var postDAO = Converter.convertFromPostBOtoPostDAO(this);
-	postDAO.save(function(err, data){
+	postDAO.save(function(err, postDAOReturned){
 		if(err){
 			console.error(err);
 		}
-		callback(err, data);
+		var postBO = Converter.convertFromPostDAOtoPostBO(postDAOReturned);
+		callback(err, postBO);
 	});
 }
 

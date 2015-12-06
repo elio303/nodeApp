@@ -10,7 +10,13 @@ var addNewMessage = require('./addNewMessage');
 
 app.set('port', (process.env.PORT || 5000));
 app.set('views',  __dirname + '/views/pages');
+app.set('partials',  __dirname + '/views/partials');
 app.set('view engine', 'ejs');
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use("/styles",  express.static(__dirname + '/public/stylesheets'));
+app.use("/scripts", express.static(__dirname + '/public/javascripts'));
+app.use("/images",  express.static(__dirname + '/public/images'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -23,37 +29,8 @@ app.use(function(req, res, next){
 	next();
 });
 
-app.get('/', function(req, res) {
-	listOfPosts(function(err, posts){
-		if(err){
-			console.log(err);
-		}
-		res.render('index', {
-		    name: "",
-		    message: "",
-		    posts: posts
-		});
-	});
-});
-
-app.post('/', function(req, res) {
-	var name = req.body.name;
-	var message = req.body.message;
-	// adding message to DB
-	addNewMessage(name, message, function(err, postBO){
-		// Getting all messages from DB
-		listOfPosts(function(err, posts){
-			if(err){
-				console.log(err);
-			}
-			res.render('index', {
-			    name: name,
-			    message: message,
-			    posts: posts
-			});
-		});
-	});
-});
+// Load routes
+require('./router.js')(app);
 
 server.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

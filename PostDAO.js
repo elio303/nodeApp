@@ -30,8 +30,8 @@ postDAOSchema.statics.create = function(id, name, message){
 	});
 };
 
-postDAOSchema.statics.list = function(callback){
-	PostDAO.find({}, null, {limit: 10, sort: {'time': -1}}, function(err, postDAOs) {
+postDAOSchema.statics.list = function(numPostSkip, callback){
+	PostDAO.find({}, null, {skip: numPostSkip, limit: 10, sort: {'time': -1}}, function(err, postDAOs) {
 		if(err){
 			console.error("Error when finding posts in DB: " + err);
 		}
