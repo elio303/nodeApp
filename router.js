@@ -23,7 +23,7 @@ module.exports = function(app){
 			if(err){
 				console.log(err);
 			}
-			if(posts.length != 0){
+			if(posts.length > 0){
 				res.render('morePosts', {
 				    posts: posts
 				});
@@ -33,18 +33,6 @@ module.exports = function(app){
 					done: 'done'
 				});
 			}
-		});
-	})
-
-	app.post('/', function(req, res) {
-		var name = req.body.name;
-		var message = req.body.message;
-		// adding message to DB
-		addNewMessage(name, message, function(err, postBO){
-			// Returning AJAX call with submitted post
-			res.render('morePosts', {
-				posts: [postBO]
-			});
 		});
 	});
 }

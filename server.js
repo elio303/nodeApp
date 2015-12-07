@@ -32,6 +32,9 @@ app.use(function(req, res, next){
 // Load routes
 require('./router.js')(app);
 
+// Load Socket IO
+require('./socket.js')(server);
+
 server.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
