@@ -37,6 +37,8 @@ window.onload = function(){
 			name: name,
 			message: message
 		});
+		// Revert value of message to null
+		//$('#message').val() = "";
 	});
 
 	// Receiving broadcast and adding to messages
